@@ -23,16 +23,6 @@ struct ContentView: View {
 
     @Environment(\.scenePhase) var scenePhase
     
-    private let fastingHours = 16
-    
-    var fastingTargetTime: Double {
-        return Double(fastingHours) * 3600.0
-    }
-    
-    var eatingTargetTime: Double {
-        return (24.0 - Double(fastingHours)) * 3600.0
-    }
-    
     private let fastStartNotification = FastingNotification(title: "Start Fasting!", message: "Your eating window has ended, start fasting!")
     private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
 
@@ -44,7 +34,7 @@ struct ContentView: View {
             Text(elapsedText)
                 .font(.largeTitle.monospacedDigit())
             
-            let targetTime = fast.fasting ? fastingTargetTime : eatingTargetTime
+            let targetTime = fast.fasting ? fast.fastingTargetTime : fast.eatingTargetTime
             
             ProgressView(value: elapsed, total: targetTime)
             HStack {
@@ -64,7 +54,7 @@ struct ContentView: View {
                 } label: {
                     VStack {
                         Text(fast.fasting ? "Goal" : "Ended")
-                        Text(formatDateToString(date: fast.fasting ? fastingGoalTime : fast.endTime))
+                        Text(formatDateToString(date: fast.fasting ? fast.fastingGoalTime : fast.endTime))
                     }
                 }.disabled(fast.endTime == nil)
             }
@@ -101,10 +91,10 @@ struct ContentView: View {
             .padding()
         }
         .onChange(of: fast.startTime) {
-            fastEndNotification.schedule(for: fastingGoalTime)
+            fastEndNotification.schedule(for: fast.fastingGoalTime)
         }
         .onChange(of: fast.endTime) {
-            fastStartNotification.schedule(for: plannedFastingTime)
+            fastStartNotification.schedule(for: fast.nextFastingTime)
         }
         .onChange(of: scenePhase) {
             if scenePhase == .background {
@@ -120,9 +110,9 @@ struct ContentView: View {
         fast.toggle()
 
         if fast.fasting {
-            fastEndNotification.schedule(for: fastingGoalTime)
+            fastEndNotification.schedule(for: fast.fastingGoalTime)
         } else {
-            fastStartNotification.schedule(for: plannedFastingTime)
+            fastStartNotification.schedule(for: fast.nextFastingTime)
         }
         timer.start()
         saveState()
@@ -174,24 +164,6 @@ struct ContentView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: validDate)
-    }
-    
-    var fastingGoalTime: Date {
-        if let startTime = fast.startTime {
-            return Calendar.current.date(
-                byAdding: .hour, value: fastingHours, to: startTime) ?? Date()
-        }
-        
-        return Date()
-    }
-    
-    var plannedFastingTime: Date {
-        if let endTime = fast.endTime {
-            return Calendar.current.date(
-                byAdding: .hour, value: 24 - fastingHours, to: endTime) ?? Date()
-        }
-        
-        return Date()
     }
 }
 

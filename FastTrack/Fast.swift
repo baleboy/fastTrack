@@ -18,6 +18,34 @@ class Fast: ObservableObject, Codable {
         return true
     }
     
+    let fastingHours = 16
+    
+    var fastingTargetTime: Double {
+        return Double(fastingHours) * 3600.0
+    }
+    
+    var eatingTargetTime: Double {
+        return (24.0 - Double(fastingHours)) * 3600.0
+    }
+
+    var fastingGoalTime: Date {
+        if let startTime = self.startTime {
+            return Calendar.current.date(
+                byAdding: .hour, value: fastingHours, to: startTime) ?? Date()
+        }
+        
+        return Date()
+    }
+    
+    var nextFastingTime: Date {
+        if let endTime = self.endTime {
+            return Calendar.current.date(
+                byAdding: .hour, value: 24 - fastingHours, to: endTime) ?? Date()
+        }
+        
+        return Date()
+    }
+    
     func toggle() {
 
         if fasting {
