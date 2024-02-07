@@ -33,6 +33,9 @@ struct ContentView: View {
         return (24.0 - Double(fastingHours)) * 3600.0
     }
     
+    private let fastStartNotification = FastingNotification(title: "Start Fasting!", message: "Your eating window has ended, start fasting!")
+    private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
+
     var body: some View {
         VStack {
             Spacer()
@@ -98,10 +101,10 @@ struct ContentView: View {
             .padding()
         }
         .onChange(of: fast.startTime) {
-            scheduleFastingNotification(for: fastingGoalTime, type: .fastingEnd)
+            fastEndNotification.schedule(for: fastingGoalTime)
         }
         .onChange(of: fast.endTime) {
-            scheduleFastingNotification(for: plannedFastingTime, type: .fastingStart)
+            fastStartNotification.schedule(for: plannedFastingTime)
         }
         .onChange(of: scenePhase) {
             if scenePhase == .background {
@@ -117,9 +120,9 @@ struct ContentView: View {
         fast.toggle()
 
         if fast.fasting {
-            scheduleFastingNotification(for: fastingGoalTime, type: .fastingEnd)
+            fastEndNotification.schedule(for: fastingGoalTime)
         } else {
-            scheduleFastingNotification(for: plannedFastingTime, type: .fastingStart)
+            fastStartNotification.schedule(for: plannedFastingTime)
         }
         timer.start()
         saveState()
@@ -190,51 +193,6 @@ struct ContentView: View {
         
         return Date()
     }
-
-    
-    enum FastingNotificationType {
-        case fastingStart
-        case fastingEnd
-    }
-    
-    func scheduleFastingNotification(for notificationTime: Date, type: FastingNotificationType) {
-        
-        let id: String
-        let content = UNMutableNotificationContent()
-
-        if type == .fastingEnd {
-            id = "fastingEndNotification"
-            content.title = "Fasting Complete!"
-            content.body = "Your fasting period has ended. Great job!"
-        } else {
-            id = "fastingStartNotification"
-            content.title = "Start fasting!"
-            content.body = "Your eating window has ended. Start fasting!"
-        }
-                
-        // cancel any pending notification
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
-        
-        content.sound = UNNotificationSound.default
-
-        // for testing
-        // let futureDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
-
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
-        
-
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-
-        let request = UNNotificationRequest(identifier: "fastingEndNotification", content: content, trigger: trigger)
-        print("Scheduling notification for \(triggerDate)")
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                // Handle any errors
-                print("Error scheduling notification: \(error)")
-            }
-        }
-    }
-
 }
 
 
