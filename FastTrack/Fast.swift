@@ -20,15 +20,15 @@ class Fast: ObservableObject, Codable {
     
     let fastingHours = 16
     
-    var fastingTargetTime: Double {
+    var fastingWindow: Double {
         return Double(fastingHours) * 3600.0
     }
     
-    var eatingTargetTime: Double {
+    var eatingWindow: Double {
         return (24.0 - Double(fastingHours)) * 3600.0
     }
 
-    var fastingGoalTime: Date {
+    var goalTime: Date {
         if let startTime = self.startTime {
             return Calendar.current.date(
                 byAdding: .hour, value: fastingHours, to: startTime) ?? Date()

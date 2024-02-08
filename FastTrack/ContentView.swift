@@ -19,6 +19,7 @@ struct ContentView: View {
         case start
         case end
     }
+    
     @State private var datePickerSelection : DatePickerSelection = .start
 
     @Environment(\.scenePhase) var scenePhase
@@ -34,9 +35,9 @@ struct ContentView: View {
             Text(elapsedText)
                 .font(.largeTitle.monospacedDigit())
             
-            let targetTime = fast.fasting ? fast.fastingTargetTime : fast.eatingTargetTime
+            let window = fast.fasting ? fast.fastingWindow : fast.eatingWindow
             
-            ProgressView(value: elapsed, total: targetTime)
+            ProgressView(value: elapsed, total: window)
             HStack {
                 Button {
                     self.datePickerSelection = .start
@@ -54,7 +55,7 @@ struct ContentView: View {
                 } label: {
                     VStack {
                         Text(fast.fasting ? "Goal" : "Ended")
-                        Text(formatDateToString(date: fast.fasting ? fast.fastingGoalTime : fast.endTime))
+                        Text(formatDateToString(date: fast.fasting ? fast.goalTime : fast.endTime))
                     }
                 }.disabled(fast.endTime == nil)
             }
@@ -91,7 +92,7 @@ struct ContentView: View {
             .padding()
         }
         .onChange(of: fast.startTime) {
-            fastEndNotification.schedule(for: fast.fastingGoalTime)
+            fastEndNotification.schedule(for: fast.goalTime)
         }
         .onChange(of: fast.endTime) {
             fastStartNotification.schedule(for: fast.nextFastingTime)
@@ -110,7 +111,7 @@ struct ContentView: View {
         fast.toggle()
 
         if fast.fasting {
-            fastEndNotification.schedule(for: fast.fastingGoalTime)
+            fastEndNotification.schedule(for: fast.goalTime)
         } else {
             fastStartNotification.schedule(for: fast.nextFastingTime)
         }
