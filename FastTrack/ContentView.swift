@@ -14,13 +14,8 @@ struct ContentView: View {
     @ObservedObject private var fast: Fast
 
     @State private var showingDatePicker = false
-    
-    enum DatePickerSelection {
-        case start
-        case end
-    }
-    
-    @State private var datePickerSelection : DatePickerSelection = .start
+        
+    @State private var datePickerSelection : CustomDatePicker.Selection = .start
 
     @Environment(\.scenePhase) var scenePhase
     
@@ -75,20 +70,7 @@ struct ContentView: View {
         }
         .padding(80)
         .sheet(isPresented: $showingDatePicker, onDismiss: saveState) {
-            VStack {
-                if datePickerSelection == .start {
-                    DatePicker("Select Start Time", selection: Binding($fast.startTime)!, displayedComponents: .hourAndMinute)
-                } else {
-                    DatePicker("Select End Time", selection: Binding($fast.endTime)!, displayedComponents: .hourAndMinute)
-                }
-                Button {
-                    showingDatePicker = false
-                } label: {
-                    Text("Done")
-                }.buttonStyle(.borderedProminent)
-                .padding()
-            }
-            .datePickerStyle(GraphicalDatePickerStyle())
+            CustomDatePicker(selection: datePickerSelection, startTime: $fast.startTime, endTime: $fast.endTime, showingDatePicker: $showingDatePicker)
             .padding()
         }
         .onChange(of: fast.startTime) {
