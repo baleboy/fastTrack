@@ -37,6 +37,13 @@ class Fast: ObservableObject, Codable {
         return Date()
     }
     
+    var successful: Bool {
+        if let startTime = self.startTime {
+            return (endTime ?? Date()).timeIntervalSince(startTime) > fastingWindow
+        }            
+        return false
+    }
+    
     var nextFastingTime: Date {
         if let endTime = self.endTime {
             return Calendar.current.date(

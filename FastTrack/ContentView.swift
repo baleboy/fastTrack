@@ -18,12 +18,17 @@ struct ContentView: View {
     @State private var datePickerSelection : CustomDatePicker.Selection = .start
 
     @Environment(\.scenePhase) var scenePhase
+
+    @State private var fasts: [Fast] = []
     
     private let fastStartNotification = FastingNotification(title: "Start Fasting!", message: "Your eating window has ended, start fasting!")
     private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
 
     var body: some View {
         VStack {
+            if streak > 0 {
+                Text("Streak: \(streak)🔥")
+            }
             Spacer()
             Text(fast.fasting ? "FASTING" : "NOT FASTING").font(.title)
             Text (fastingText).padding(10).font(.caption)
@@ -90,6 +95,12 @@ struct ContentView: View {
 
     func toggleFastingState() {
 
+        if !fast.fasting {
+            // starting a new fast, store the
+            // current one
+            fasts.append(fast)
+        }
+        
         fast.toggle()
 
         if fast.fasting {
@@ -112,6 +123,18 @@ struct ContentView: View {
         return Date().timeIntervalSince(startTime)
     }
     
+    var streak: Int {
+        var streak = 0
+        for fast in fasts.reversed() {
+            if fast.successful {
+                streak += 1
+            } else {
+                break
+            }
+        }
+        return streak
+    }
+        
     var elapsedText: String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]

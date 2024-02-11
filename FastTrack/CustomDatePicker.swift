@@ -10,19 +10,19 @@ import SwiftUI
 
 struct CustomDatePicker: View {
     
-    enum DatePickerSelection {
+    enum Selection {
         case start
         case end
     }
 
-    var datePickerSelection = DatePickerSelection.start
+    var selection = Selection.start
     @Binding var startTime: Date?
     @Binding var endTime: Date?
     @Binding var showingDatePicker: Bool
     
     var body: some View {
         VStack {
-            if datePickerSelection == .start {
+            if selection == .start {
                 DatePicker("Select Start Time", selection: Binding($startTime)!, displayedComponents: .hourAndMinute)
             } else {
                 DatePicker("Select End Time", selection: Binding($endTime)!, displayedComponents: .hourAndMinute)
