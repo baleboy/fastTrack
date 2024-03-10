@@ -13,8 +13,12 @@ struct FastingNotification {
     var title = "Default notification"
     var message = "This is a default notification"
     
-    func schedule(for notificationTime: Date) {
+    func schedule(for notificationTime: Date?) {
         
+        guard let time = notificationTime else {
+            return
+        }
+                
         let content = UNMutableNotificationContent()
                 
         // cancel any pending notification
@@ -25,7 +29,7 @@ struct FastingNotification {
         // for testing
         // let futureDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
 
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
+        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: time)
         
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
