@@ -13,10 +13,12 @@ import SwiftUI
 // or calling the convenience method stop()
 
 
-class Fast: ObservableObject, Codable {
+class Fast: ObservableObject, Codable, Identifiable {
 
     static let defaultFastingHours = 16
 
+    var id = UUID()
+    
     @Published var startTime: Date
     @Published var endTime: Date?
 

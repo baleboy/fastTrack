@@ -22,56 +22,69 @@ struct ContentView: View {
     private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
 
     var body: some View {
-        VStack {
-            if fm.streak > 0 {
-                Text("Streak: \(fm.streak)🔥")
+        TabView {
+            VStack {
+                if fm.streak > 0 {
+                    Text("Streak: \(fm.streak)🔥")
+                }
+                Spacer()
+                Text(fm.isFasting ? "FASTING" : "NOT FASTING").font(.title)
+                Text (fastingText).padding(10).font(.caption)
+                Text(elapsedText)
+                    .font(.largeTitle.monospacedDigit())
+                
+                let currentDuration = fm.isFasting ? fm.fastingDuration : fm.eatingDuration
+                
+                ProgressView(value: elapsed, total: currentDuration)
+                
+                Group {
+                    if let _ = fm.latestFast {
+                        EditableFastView(fast: Binding(
+                            get: { self.fm.latestFast ?? Fast() },
+                            set: { self.fm.updateLatestFast(with: $0) }
+                        ))
+                    } else {
+                        Text("Not fasted yet")
+                    }
+                }
+                
+                Button(){
+                    toggleFastingState()
+                } label: {
+                    Text(fm.isFasting ? "Stop Fasting" : "Start Fasting")
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+                
+                Spacer()
             }
-            Spacer()
-            Text(fm.isFasting ? "FASTING" : "NOT FASTING").font(.title)
-            Text (fastingText).padding(10).font(.caption)
-            Text(elapsedText)
-                .font(.largeTitle.monospacedDigit())
-            
-            let currentDuration = fm.isFasting ? fm.fastingDuration : fm.eatingDuration
-            
-            ProgressView(value: elapsed, total: currentDuration)
-            
-            Group {
-                if let _ = fm.latestFast {
-                    EditableFastView(fast: Binding(
-                        get: { self.fm.latestFast ?? Fast() },
-                        set: { self.fm.updateLatestFast(with: $0) }
-                    ))
-                } else {
-                    Text("Not fasted yet")
+            .padding(80)
+            .onChange(of: fm.latestStartTime) {
+                fastEndNotification.schedule(for: fm.currentGoalTime)
+            }
+            .onChange(of: fm.latestEndTime) {
+                fastStartNotification.schedule(for: fm.nextfastingTime)
+            }
+            .onChange(of: scenePhase) {
+                if scenePhase == .background {
+                    timer.stop()
+                } else if scenePhase == .active {
+                    timer.resume()
                 }
             }
-
-            Button(){
-                toggleFastingState()
-            } label: {
-                Text(fm.isFasting ? "Stop Fasting" : "Start Fasting")
+            .tabItem {
+                Label("Home", systemImage: "house")
             }
-            .buttonStyle(.borderedProminent)
-            .padding()
-
-            Spacer()
-        }
-        .padding(80)
-        .onChange(of: fm.latestStartTime) {
-            fastEndNotification.schedule(for: fm.currentGoalTime)
-        }
-        .onChange(of: fm.latestEndTime) {
-            fastStartNotification.schedule(for: fm.nextfastingTime)
-        }
-        .onChange(of: scenePhase) {
-            if scenePhase == .background {
-                timer.stop()
-            } else if scenePhase == .active {
-                timer.resume()
-            }
+            
+            
+            FastsListView(fastManager: fm)
+                .tabItem {
+                    Label("Fasts", systemImage: "list.bullet")
+                }
         }
     }
+    
+    
 
     func toggleFastingState() {
 
