@@ -94,6 +94,7 @@ class FastManager: ObservableObject {
     func stopFasting() {
         if let fast = latestFast {
             fast.endTime = Date()
+            fasts[fasts.count - 1] = fast // This reassignment helps SwiftUI detect the change.
         }
     }
         

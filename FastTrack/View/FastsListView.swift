@@ -11,7 +11,7 @@ struct FastsListView: View {
     @ObservedObject var fastManager: FastManager
 
     var body: some View {
-        List(fastManager.fasts, id: \.id) { fast in
+        List(fastManager.fasts.reversed(), id: \.id) { fast in
             VStack(alignment: .leading) {
                 Text("Start Time: \(formatDate(fast.startTime))")
                 Text("End Time: \(fast.endTime != nil ? formatDate(fast.endTime!) : "Ongoing")")
