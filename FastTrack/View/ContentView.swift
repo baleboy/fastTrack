@@ -90,15 +90,12 @@ struct ContentView: View {
 
         if !fm.isFasting {
             fm.startFasting()
-        } else {
-            fm.stopFasting()
-        }
-
-        if fm.isFasting {
             fastEndNotification.schedule(for: fm.currentGoalTime)
         } else {
+            fm.stopFasting()
             fastStartNotification.schedule(for: fm.nextfastingTime)
         }
+
         timer.start()
         saveState()
     }
