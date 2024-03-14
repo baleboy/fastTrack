@@ -11,7 +11,6 @@ import UserNotifications
 struct ContentView: View {
 
     @ObservedObject private var timer: StopWatchTimer
-    // private var fast: Fast
     @ObservedObject private var fm: FastManager
 
     @State private var showingDatePicker = false
@@ -23,42 +22,9 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            VStack {
-                if fm.streak > 0 {
-                    Text("Streak: \(fm.streak)🔥")
-                }
-                Spacer()
-                Text(fm.isFasting ? "FASTING" : "NOT FASTING").font(.title)
-                Text (fastingText).padding(10).font(.caption)
-                Text(elapsedText)
-                    .font(.largeTitle.monospacedDigit())
-                
-                let currentDuration = fm.isFasting ? fm.fastingDuration : fm.eatingDuration
-                
-                ProgressView(value: elapsed, total: currentDuration)
-                
-                Group {
-                    if let _ = fm.latestFast {
-                        EditableFastView(fast: Binding(
-                            get: { self.fm.latestFast ?? Fast() },
-                            set: { self.fm.updateLatestFast(with: $0) }
-                        ))
-                    } else {
-                        Text("Not fasted yet")
-                    }
-                }
-                
-                Button(){
-                    toggleFastingState()
-                } label: {
-                    Text(fm.isFasting ? "Stop Fasting" : "Start Fasting")
-                }
-                .buttonStyle(.borderedProminent)
-                .padding()
-                
-                Spacer()
+            FastingView(fastManager: fm,timer: timer) {
+                toggleFastingState()
             }
-            .padding(80)
             .onChange(of: fm.latestStartTime) {
                 fastEndNotification.schedule(for: fm.currentGoalTime)
             }
@@ -84,8 +50,6 @@ struct ContentView: View {
         }
     }
     
-    
-
     func toggleFastingState() {
 
         if !fm.isFasting {
