@@ -64,29 +64,6 @@ struct ContentView: View {
         saveState()
     }
         
-    var fastingText: String {
-        return fm.isFasting ? "Time fasting" : "Time since last fast"
-    }
-    
-    var elapsed: TimeInterval {
-        
-        let startTime = fm.latestEndTime ?? fm.latestStartTime ?? Date()
-    
-        return Date().timeIntervalSince(startTime)
-    }
-        
-    var elapsedText: String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = .pad
-        
-        // Convert TimeInterval to String
-        let formattedString = formatter.string(from: elapsed) ?? "Invalid Interval"
-        
-        return formattedString
-    }
-    
     init() {
         
         print("loading state")
