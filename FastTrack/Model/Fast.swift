@@ -29,7 +29,11 @@ class Fast: ObservableObject, Codable, Identifiable {
     }
     
     var successful: Bool {
-        return (endTime ?? Date()).timeIntervalSince(startTime) >= Double(fastingHours * 3600)
+        return duration >= Double(fastingHours * 3600)
+    }
+    
+    var duration: TimeInterval {
+        return (endTime ?? Date()).timeIntervalSince(startTime)
     }
     
     var goalTime: Date? {

@@ -39,7 +39,7 @@ struct ContentView: View {
                 }
             }
             .tabItem {
-                Label("Home", systemImage: "house")
+                Label("Timer", systemImage: "clock")
             }
             
             
