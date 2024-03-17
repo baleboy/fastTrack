@@ -46,6 +46,10 @@ class FastManager: ObservableObject {
         return Double((24 - fastingHours) * 3600)
     }
     
+    var currentDuration: Double {
+        return isFasting ? fastingDuration : eatingDuration
+    }
+    
     var latestStartTime: Date? {
         return latestFast?.startTime
     }
