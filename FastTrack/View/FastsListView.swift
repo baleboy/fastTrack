@@ -11,16 +11,22 @@ struct FastsListView: View {
     @ObservedObject var fastManager: FastManager
 
     var body: some View {
-        List {
-            ForEach(fastManager.fasts.reversed(), id: \.id) { fast in
-                VStack(alignment: .leading) {
-                    Text("Start Time: \(formatDate(fast.startTime))")
-                    Text("End Time: \(fast.endTime != nil ? formatDate(fast.endTime!) : "Ongoing")")
-                        .foregroundColor(fast.endTime != nil ? .black : .red)
-                    Text("Duration: \(formatDuration(fast.duration))")
+        if fastManager.fasts.isEmpty {
+            Text("You haven't fasted yet")
+                .font(.title)
+                .foregroundColor(.gray)
+        } else {
+            List {
+                ForEach(fastManager.fasts.reversed(), id: \.id) { fast in
+                    VStack(alignment: .leading) {
+                        Text("Start Time: \(formatDate(fast.startTime))")
+                        Text("End Time: \(fast.endTime != nil ? formatDate(fast.endTime!) : "Ongoing")")
+                            .foregroundColor(fast.endTime != nil ? .black : .red)
+                        Text("Duration: \(formatDuration(fast.duration))")
+                    }
                 }
+                .onDelete(perform: deleteFast)
             }
-            .onDelete(perform: deleteFast)
         }
     }
     private func deleteFast(at offsets: IndexSet) {
@@ -45,10 +51,10 @@ struct FastsListView: View {
 
 #Preview {
     var fm = FastManager()
-    fm.startFasting()
+    /* fm.startFasting()
     fm.stopFasting()
     fm.startFasting()
     fm.stopFasting()
-    fm.startFasting()
+    fm.startFasting()*/
     return FastsListView(fastManager: fm)
 }
