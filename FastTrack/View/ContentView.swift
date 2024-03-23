@@ -27,9 +27,11 @@ struct ContentView: View {
             }
             .onChange(of: fm.latestStartTime) {
                 fastEndNotification.schedule(for: fm.currentGoalTime)
+                fm.save()
             }
             .onChange(of: fm.latestEndTime) {
                 fastStartNotification.schedule(for: fm.nextfastingTime)
+                fm.save()
             }
             .onChange(of: scenePhase) {
                 if scenePhase == .background {
