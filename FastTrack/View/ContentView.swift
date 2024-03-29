@@ -47,7 +47,7 @@ struct ContentView: View {
             
             FastsListView(fastManager: fm)
                 .tabItem {
-                    Label("Fasts", systemImage: "list.bullet")
+                    Label("History", systemImage: "list.bullet")
                 }
         }
     }
