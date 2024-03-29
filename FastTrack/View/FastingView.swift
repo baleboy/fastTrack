@@ -75,6 +75,7 @@ struct FastingView: View {
 }
 
 #Preview {
+    
     FastingView(fastManager: FastManager(), timer: StopWatchTimer()) {
         print("button pressed")
     }

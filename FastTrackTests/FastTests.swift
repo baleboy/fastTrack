@@ -24,14 +24,14 @@ class FastTests: XCTestCase {
         let now = Date()
         let fastingHours = 16
         let fast = Fast(startTime: now, endTime: now.addingTimeInterval(Double(fastingHours * 3600 - 1)), fastingHours: fastingHours)
-        XCTAssertFalse(fast.successful, "Successful should be false when the fasting period is less than fastingHours")
+        XCTAssertFalse(fast.isSuccessful, "Successful should be false when the fasting period is less than fastingHours")
     }
     
     func testFast_SuccessfulWhenEnoughTimeHasPassed() {
         let now = Date()
         let fastingHours = 16
         let fast = Fast(startTime: now, endTime: now.addingTimeInterval(Double(fastingHours * 3600)), fastingHours: fastingHours)
-        XCTAssertTrue(fast.successful, "Successful should be true when the fasting period is equal to or greater than fastingHours")
+        XCTAssertTrue(fast.isSuccessful, "Successful should be true when the fasting period is equal to or greater than fastingHours")
     }
     
     func testFast_SuccessfulWhenEndTimeIsNil() {
@@ -39,6 +39,6 @@ class FastTests: XCTestCase {
         let fastingHours = 16
         let start = Calendar.current.date(byAdding: .hour, value: -fastingHours, to: now)!
         let fast = Fast(startTime: start, endTime: nil, fastingHours: fastingHours)
-        XCTAssertTrue(fast.successful, "Successful should be true when the fasting period has surpassed fastingHours and endTime is nil")
+        XCTAssertTrue(fast.isSuccessful, "Successful should be true when the fasting period has surpassed fastingHours and endTime is nil")
     }
 }

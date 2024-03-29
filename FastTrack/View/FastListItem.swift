@@ -10,10 +10,16 @@ import SwiftUI
 struct FastListItem: View {
     var fast: Fast
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Start Time: \(formatDate(fast.startTime))")
-            Text("End Time: \(formatDate(fast.endTime!))")
-            Text("Duration: \(formatDuration(fast.duration))")
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Start Time: \(formatDate(fast.startTime))")
+                Text("End Time: \(formatDate(fast.endTime!))")
+                Text("Duration: \(formatDuration(fast.duration))")
+            }
+            Spacer() // This pushes the checkmark to the right
+            Image(systemName: fast.isSuccessful ? "checkmark.circle.fill" : "xmark.circle.fill")
+                .foregroundColor(fast.isSuccessful ? .green : .red)
+
         }
     }
     

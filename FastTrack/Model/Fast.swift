@@ -28,7 +28,7 @@ class Fast: ObservableObject, Codable, Identifiable {
         return endTime == nil
     }
     
-    var successful: Bool {
+    var isSuccessful: Bool {
         return duration >= Double(fastingHours * 3600)
     }
     

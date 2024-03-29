@@ -82,7 +82,7 @@ class FastManager: ObservableObject {
     var streak: Int {
         var streak = 0
         for fast in fasts.reversed() {
-            if fast.successful {
+            if fast.isSuccessful  {
                 streak += 1
             } else {
                 break
