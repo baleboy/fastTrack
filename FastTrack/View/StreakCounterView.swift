@@ -14,7 +14,7 @@ struct StreakCounterView: View {
             Text("Streak: \(fastManager.streak) 🔥")
                 .foregroundColor(.white)
                 .padding()
-                .background(Color.gray)
+                .background(Color.indigo)
                 .clipShape(Capsule())
         }
     }
