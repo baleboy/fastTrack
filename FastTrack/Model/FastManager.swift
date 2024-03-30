@@ -82,15 +82,15 @@ class FastManager: ObservableObject {
     var streak: Int {
         var streak = 0
         for fast in fasts.reversed() {
-            if fast.isSuccessful  {
+            if fast.isSuccessful {
                 streak += 1
-            } else {
+            } else if !fast.isFasting {
                 break
             }
         }
         return streak
     }
-    
+
     func startFasting() {
         fasts.append(Fast(startTime: Date()))
     }
