@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FastsListView: View {
+struct FastHistoryView: View {
     @ObservedObject var fastManager: FastManager
 
     var body: some View {
@@ -44,5 +44,5 @@ struct FastsListView: View {
     fm.startFasting()
     fm.stopFasting()
     fm.startFasting()
-    return FastsListView(fastManager: fm)
+    return FastHistoryView(fastManager: fm)
 }
