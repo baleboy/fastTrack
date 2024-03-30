@@ -15,9 +15,7 @@ struct FastingView: View {
     
     var body: some View {
         VStack {
-            if fastManager.streak > 0 {
-                Text("Streak: \(fastManager.streak)🔥")
-            }
+            StreakCounterView(fastManager: fastManager)
             Spacer()
             Text(fastManager.isFasting ? "FASTING" : "NOT FASTING").font(.title)
             Text (fastingText).padding(10).font(.caption)

@@ -11,17 +11,20 @@ struct FastsListView: View {
     @ObservedObject var fastManager: FastManager
 
     var body: some View {
-        NavigationView {
-            if fastManager.fasts.isEmpty {
-                Text("No completed fasts")
-                    .font(.title)
-                    .foregroundColor(.gray)
-            } else {
-                List {
-                    ForEach(fastManager.fasts.reversed().filter { $0.endTime != nil }, id: \.id) { fast in
-                        FastListItem(fast: fast)
+        if fastManager.fasts.isEmpty {
+            Text("No completed fasts")
+                .font(.title)
+                .foregroundColor(.gray)
+        } else {
+            NavigationView {
+                VStack {
+                    StreakCounterView(fastManager: fastManager)
+                    List {
+                        ForEach(fastManager.fasts.reversed().filter { $0.endTime != nil }, id: \.id) { fast in
+                            FastListItem(fast: fast)
+                        }
+                        .onDelete(perform: deleteFast)
                     }
-                    .onDelete(perform: deleteFast)
                 }
                 .navigationTitle("Completed Fasts")
                 .navigationBarTitleDisplayMode(.inline)
