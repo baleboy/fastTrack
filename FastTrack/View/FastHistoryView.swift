@@ -20,7 +20,7 @@ struct FastHistoryView: View {
                 VStack {
                     StreakCounterView(fastManager: fastManager)
                     List {
-                        ForEach(fastManager.fasts.reversed().filter { $0.endTime != nil }, id: \.id) { fast in
+                        ForEach(fastManager.fasts.filter { $0.endTime != nil }, id: \.id) { fast in
                             FastListItem(fast: fast)
                         }
                         .onDelete(perform: deleteFast)

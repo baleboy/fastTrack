@@ -19,12 +19,12 @@ class FastManager: ObservableObject {
     }
     
     var latestFast: Fast? {
-        return fasts.last
+        return fasts.first
     }
     
     func updateLatestFast(with fast: Fast) {
         if !fasts.isEmpty {
-            fasts[fasts.count - 1] = fast
+            fasts[0] = fast
         } else {
             fasts.append(fast)
         }
@@ -92,13 +92,13 @@ class FastManager: ObservableObject {
     }
 
     func startFasting() {
-        fasts.append(Fast(startTime: Date()))
+        fasts.insert(Fast(startTime: Date()), at:0)
     }
     
     func stopFasting() {
         if let fast = latestFast {
             fast.endTime = Date()
-            fasts[fasts.count - 1] = fast // This reassignment helps SwiftUI detect the change.
+            fasts[0] = fast // This reassignment helps SwiftUI detect the change.
         }
     }
         
