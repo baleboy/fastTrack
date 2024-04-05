@@ -13,6 +13,7 @@ class FastManager: ObservableObject {
     
     let userDefaults: UserDefaults
     var fastingHours = 16
+    var maxHoursBetweenFasts = 24
     
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
@@ -81,10 +82,18 @@ class FastManager: ObservableObject {
     
     var streak: Int {
         var streak = 0
-        for fast in fasts {
-            if fast.isSuccessful {
-                streak += 1
-            } else if !fast.isFasting {
+        for i in 0..<fasts.count {
+            if fasts[i].isSuccessful {
+                if i > 0 {
+                    // Calculate the time difference in hours between the start of the current fast and the end of the previous fast
+                    let calendar = Calendar.current
+                    let dateComponents = calendar.dateComponents([.hour], from: fasts[i].endTime!, to: fasts[i-1].startTime)
+                    if let hour = dateComponents.hour, hour > maxHoursBetweenFasts {
+                        break // More than allowed hours have passed, streak ends
+                    }
+                }
+                streak += 1 // Increment the streak for a successful fast within the allowed time
+            } else if !fasts[i].isFasting {
                 break
             }
         }
