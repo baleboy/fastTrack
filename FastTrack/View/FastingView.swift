@@ -22,7 +22,8 @@ struct FastingView: View {
             Text(elapsedText)
                 .font(.largeTitle.monospacedDigit())
             
-            ProgressView(value: elapsed, total: fastManager.currentDuration)
+            if fastManager.isFasting { ProgressView(value: elapsed, total: fastManager.currentDuration)
+            }
             
             Group {
                 if let _ = fastManager.latestFast {
