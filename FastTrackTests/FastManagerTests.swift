@@ -204,5 +204,18 @@ final class FastManagerTests: XCTestCase {
 
         XCTAssertEqual(fastManager.streak, 2, "Streak should be 2 for consecutive successful fasts, even if one is not completed")
     }
+    
+    func testFastManager_testStreakWithLongTimeSinceLastFast() {
+        let dayBeforeYesterday = calendar.date(byAdding: .day, value: -2, to: now)!
+        let threeDaysAgo = calendar.date(byAdding: .day, value: -3, to: now)!
+        let fourDaysAgo = calendar.date(byAdding: .day, value: -4, to: now)!
+
+        let firstFast = Fast(startTime: fourDaysAgo, endTime: threeDaysAgo)
+        let secondFast = Fast(startTime: threeDaysAgo, endTime: dayBeforeYesterday)
+
+        fastManager.fasts = [secondFast, firstFast]
+
+        XCTAssertEqual(fastManager.streak, 0, "Streak should be 0 if the last fast completed more than a day ago")
+    }
 
 }

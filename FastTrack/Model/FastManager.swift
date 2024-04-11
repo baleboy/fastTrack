@@ -82,7 +82,18 @@ class FastManager: ObservableObject {
     
     var streak: Int {
         var streak = 0
+        let calendar = Calendar.current
+        let now = Date()
+        
         for i in 0..<fasts.count {
+            
+            if i == 0 {
+                // Special case for the most recent fast: Check if it ended more than `maxHoursBetweenFasts` ago
+                if let lastFastEndTime = fasts[i].endTime, let hoursSinceLastFast = calendar.dateComponents([.hour], from: lastFastEndTime, to: now).hour, hoursSinceLastFast > maxHoursBetweenFasts {
+                    break // If the last fast ended more than `maxHoursBetweenFasts` hours ago, streak is broken immediately
+                }
+            }
+            
             if fasts[i].isSuccessful {
                 if i > 0 {
                     // Calculate the time difference in hours between the start of the current fast and the end of the previous fast
