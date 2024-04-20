@@ -111,6 +111,15 @@ class FastManager: ObservableObject {
         return streak
     }
 
+    func fastForDate(_ date: Date) -> Fast? {
+        for fast in fasts {
+            if Calendar.current.isDate(fast.endTime ?? Date(), inSameDayAs: date) {
+                return fast
+            }
+        }
+        return nil
+    }
+    
     func startFasting() {
         fasts.insert(Fast(startTime: Date()), at:0)
     }

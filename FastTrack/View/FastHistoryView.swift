@@ -18,22 +18,13 @@ struct FastHistoryView: View {
         } else {
             NavigationView {
                 VStack {
-                    StreakCounterView(fastManager: fastManager)
-                    List {
-                        ForEach(fastManager.fasts.filter { $0.endTime != nil }, id: \.id) { fast in
-                            FastListItem(fast: fast)
-                        }
-                        .onDelete(perform: deleteFast)
-                    }
+                    FastingCalendarView(fastManager: fastManager).padding(15)
+                    Spacer()
                 }
-                .navigationTitle("Completed Fasts")
+                .navigationTitle("Fast History")
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-    }
-    private func deleteFast(at offsets: IndexSet) {
-        fastManager.fasts.remove(atOffsets: offsets)
-        fastManager.save()
     }
 }
 
