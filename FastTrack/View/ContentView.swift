@@ -41,7 +41,7 @@ struct ContentView: View {
                 }
             }
             .tabItem {
-                Label("Timer", systemImage: "clock")
+                Label("Today", systemImage: "clock")
             }
             
             

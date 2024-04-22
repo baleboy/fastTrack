@@ -17,36 +17,41 @@ struct FastingView: View {
         VStack {
             StreakCounterView(fastManager: fastManager)
             Spacer()
-            Text(fastManager.isFasting ? "FASTING" : "NOT FASTING").font(.title)
-            Text (fastingText).padding(10).font(.caption)
-            Text(elapsedText)
-                .font(.largeTitle.monospacedDigit())
-            
-            if fastManager.isFasting { ProgressView(value: elapsed, total: fastManager.currentDuration)
-            }
-            
-            Group {
-                if let _ = fastManager.latestFast {
-                    EditableFastView(fast: Binding(
-                        get: { self.fastManager.latestFast ?? Fast() },
-                        set: { self.fastManager.updateLatestFast(with: $0) }
-                    ))
-                } else {
-                    Text("Not fasted yet")
+            VStack(spacing: 20) {
+                Card(title: fastingText) {
+                    VStack {
+                        Text(elapsedText)
+                            .font(.largeTitle.monospacedDigit())
+                        
+                        if fastManager.isFasting { ProgressView(value: elapsed, total: fastManager.currentDuration)
+                        }
+                        
+                        Button(){
+                            toggleFasting()
+                        } label: {
+                            Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    }
                 }
-            }
-            
-            Button(){
-                toggleFasting()
-            } label: {
-                Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
-            }
-            .buttonStyle(.borderedProminent)
-            .padding()
+                
+                if let currentFast = fastManager.latestFast {
+                    Card(title: currentFast.isFasting ? "Current Fast" : "Previous fast") {
+                        VStack {
+                                EditableFastView(fast: Binding(
+                                    get: { self.fastManager.latestFast ?? Fast() },
+                                    set: { self.fastManager.updateLatestFast(with: $0) }
+                                )).padding(.horizontal, 80)
+                            }
+                        .padding(.vertical, 20)
+                        }
+                    }
+                }
             
             Spacer()
         }
-        .padding(80)
+        .padding(10)
     }
     
     var fastingText: String {

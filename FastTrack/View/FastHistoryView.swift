@@ -18,7 +18,9 @@ struct FastHistoryView: View {
         } else {
             NavigationView {
                 VStack {
-                    FastingCalendarView(fastManager: fastManager).padding(15)
+                    Card(title: "Last 4 weeks") { FastingCalendarView(fastManager: fastManager)
+                            .padding(10)
+                    }
                     Spacer()
                 }
                 .navigationTitle("Fast History")
