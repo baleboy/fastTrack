@@ -21,34 +21,23 @@ struct ContentView: View {
     private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
 
     var body: some View {
-        TabView {
-            FastingView(fastManager: fm,timer: timer) {
-                toggleFastingState()
+        FastingView(fastManager: fm,timer: timer) {
+            toggleFastingState()
+        }
+        .onChange(of: fm.latestStartTime) {
+            fastEndNotification.schedule(for: fm.currentGoalTime)
+            fm.save()
+        }
+        .onChange(of: fm.latestEndTime) {
+            fastStartNotification.schedule(for: fm.nextfastingTime)
+            fm.save()
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase == .background {
+                timer.stop()
+            } else if scenePhase == .active {
+                timer.resume()
             }
-            .onChange(of: fm.latestStartTime) {
-                fastEndNotification.schedule(for: fm.currentGoalTime)
-                fm.save()
-            }
-            .onChange(of: fm.latestEndTime) {
-                fastStartNotification.schedule(for: fm.nextfastingTime)
-                fm.save()
-            }
-            .onChange(of: scenePhase) {
-                if scenePhase == .background {
-                    timer.stop()
-                } else if scenePhase == .active {
-                    timer.resume()
-                }
-            }
-            .tabItem {
-                Label("Today", systemImage: "clock")
-            }
-            
-            
-            FastHistoryView(fastManager: fm)
-                .tabItem {
-                    Label("History", systemImage: "list.bullet")
-                }
         }
     }
     

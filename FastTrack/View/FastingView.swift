@@ -47,6 +47,10 @@ struct FastingView: View {
                         .padding(.vertical, 20)
                         }
                     }
+                
+                Card(title: "Last 4 weeks") { FastingCalendarView(fastManager: fastManager)
+                        .padding(10)
+                    }
                 }
             
             Spacer()
