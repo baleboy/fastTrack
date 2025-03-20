@@ -11,6 +11,8 @@ struct Card<Content: View>: View {
     let title: String
     let content: Content
     
+    @Environment(\.colorScheme) var colorScheme // Detect dark/light mode
+    
     init(title: String, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
@@ -20,15 +22,19 @@ struct Card<Content: View>: View {
         VStack(spacing: 20) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
             
             content
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.white)
+        .background(Color(uiColor: .systemBackground))
         .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.2), radius: 2)
+        .shadow(color: shadowColor, radius: 2)
+    }
+    
+    var shadowColor: Color {
+        colorScheme == .dark ? Color.white.opacity(0.4) : Color.black.opacity(0.2)
     }
 }
 #Preview {
