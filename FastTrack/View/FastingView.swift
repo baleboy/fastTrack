@@ -18,42 +18,41 @@ struct FastingView: View {
             StreakCounterView(fastManager: fastManager)
             Spacer()
             VStack(spacing: 20) {
-                Card(title: fastingText) {
-                    VStack {
-                        Text(elapsedText)
-                            .font(.largeTitle.monospacedDigit())
-                        
-                        if fastManager.isFasting { ProgressView(value: elapsed, total: fastManager.currentDuration)
-                        }
-                        
-                        Button(){
-                            toggleFasting()
-                        } label: {
-                            Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                    }
+                
+                Text(fastingText)
+                Text(elapsedText)
+                    .font(.largeTitle.monospacedDigit())
+                
+                ProgressView(value: elapsed, total: fastManager.currentDuration).padding(.horizontal, 30)
+                
+                Button(){
+                    toggleFasting()
+                } label: {
+                    Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
                 }
+                .buttonStyle(.borderedProminent)
+                .padding()
+                
                 
                 if let currentFast = fastManager.latestFast {
-                    Card(title: currentFast.isFasting ? "Current Fast" : "Previous fast") {
-                        VStack {
-                                EditableFastView(fast: Binding(
-                                    get: { self.fastManager.latestFast ?? Fast() },
-                                    set: { self.fastManager.updateLatestFast(with: $0) }
-                                )).padding(.horizontal, 80)
-                            }
-                        .padding(.vertical, 20)
-                        }
-                    }
-                
-                Card(title: "Last 4 weeks") { FastingCalendarView(fastManager: fastManager)
-                        .padding(10)
-                    }
+                    Text(currentFast.isFasting ? "Current Fast" : "Previous fast")
+                    EditableFastView(fast: Binding(
+                        get: { self.fastManager.latestFast ?? Fast() },
+                        set: { self.fastManager.updateLatestFast(with: $0) }
+                    )).padding(.horizontal, 80)
                 }
+                
+                
+                Spacer()
+                Text("Last 4 weeks")
             
-            Spacer()
+                FastingCalendarView(fastManager: fastManager)
+                    .padding(10)
+                
+                
+                
+                
+            }
         }
         .padding(10)
     }
