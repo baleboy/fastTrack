@@ -21,8 +21,11 @@ struct ContentView: View {
     private let fastEndNotification = FastingNotification(title: "Fasting Complete!", message: "Your fasting period has ended, good job!")
 
     var body: some View {
-        FastingView(fastManager: fm,timer: timer) {
-            toggleFastingState()
+        NavigationStack {
+            FastingView(fastManager: fm,timer: timer) {
+                toggleFastingState()
+            }
+            .navigationTitle("FastTrack")
         }
         .onChange(of: fm.latestStartTime) {
             fastEndNotification.schedule(for: fm.currentGoalTime)
