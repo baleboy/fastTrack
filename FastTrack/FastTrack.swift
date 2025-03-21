@@ -9,7 +9,7 @@ import SwiftUI
 import UserNotifications
 
 @main
-struct FastTrackApp: App {
+struct FastTrack: App {
 
     init() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }

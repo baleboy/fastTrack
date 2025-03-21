@@ -19,7 +19,7 @@
 		2515D25F2B91B91900992B09 /* FastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515D25E2B91B91900992B09 /* FastManagerTests.swift */; };
 		257B509F2D893BA700E7B641 /* FastingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B509E2D893BA700E7B641 /* FastingCalendarView.swift */; };
 		259A00212B6E58E9007C9E07 /* Fast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259A00202B6E58E9007C9E07 /* Fast.swift */; };
-		25BD0D0F2B57B457007D8F99 /* FastTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD0D0E2B57B457007D8F99 /* FastTrackApp.swift */; };
+		25BD0D0F2B57B457007D8F99 /* FastTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD0D0E2B57B457007D8F99 /* FastTrack.swift */; };
 		25BD0D112B57B457007D8F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD0D102B57B457007D8F99 /* ContentView.swift */; };
 		25BD0D132B57B45B007D8F99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BD0D122B57B45B007D8F99 /* Assets.xcassets */; };
 		25BD0D162B57B45B007D8F99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BD0D152B57B45B007D8F99 /* Preview Assets.xcassets */; };
@@ -50,7 +50,7 @@
 		257B509E2D893BA700E7B641 /* FastingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingCalendarView.swift; sourceTree = "<group>"; };
 		259A00202B6E58E9007C9E07 /* Fast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fast.swift; sourceTree = "<group>"; };
 		25BD0D0B2B57B457007D8F99 /* FastTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		25BD0D0E2B57B457007D8F99 /* FastTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTrackApp.swift; sourceTree = "<group>"; };
+		25BD0D0E2B57B457007D8F99 /* FastTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTrack.swift; sourceTree = "<group>"; };
 		25BD0D102B57B457007D8F99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25BD0D122B57B45B007D8F99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25BD0D152B57B45B007D8F99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			children = (
 				250858AC2B9DBAD90092DBA2 /* View */,
 				250858AB2B9DBAC80092DBA2 /* Model */,
-				25BD0D0E2B57B457007D8F99 /* FastTrackApp.swift */,
+				25BD0D0E2B57B457007D8F99 /* FastTrack.swift */,
 				25BD0D122B57B45B007D8F99 /* Assets.xcassets */,
 				25BD0D142B57B45B007D8F99 /* Preview Content */,
 				2500BB282B5D028400F92577 /* StopWatchTimer.swift */,
@@ -257,7 +257,7 @@
 			files = (
 				250858AE2B9DD17B0092DBA2 /* FastDatePickerView.swift in Sources */,
 				25BD0D112B57B457007D8F99 /* ContentView.swift in Sources */,
-				25BD0D0F2B57B457007D8F99 /* FastTrackApp.swift in Sources */,
+				25BD0D0F2B57B457007D8F99 /* FastTrack.swift in Sources */,
 				257B509F2D893BA700E7B641 /* FastingCalendarView.swift in Sources */,
 				250858AA2B9C5B5F0092DBA2 /* EditableFastView.swift in Sources */,
 				2515D2572B90508800992B09 /* FastManager.swift in Sources */,
