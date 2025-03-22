@@ -15,43 +15,41 @@ struct FastingView: View {
     
     var body: some View {
         VStack {
-            StreakCounterView(fastManager: fastManager)
-            Spacer()
-            VStack(spacing: 20) {
+            Form {
                 
-                Text(fastingText)
-                Text(elapsedText)
-                    .font(.largeTitle.monospacedDigit())
-                
-                ProgressView(value: elapsed, total: fastManager.currentDuration).padding(.horizontal, 30)
-                
-                Button(){
-                    toggleFasting()
-                } label: {
-                    Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
+                Section(fastingText) {
+                    Text(elapsedText)
+                        .font(.largeTitle.monospacedDigit())
+                    
+                    ProgressView(value: elapsed, total: fastManager.currentDuration).padding(.horizontal, 30)
+                    
+                    Button(){
+                        toggleFasting()
+                    } label: {
+                        Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                    
                 }
-                .buttonStyle(.borderedProminent)
-                .padding()
-                
-                
                 if let currentFast = fastManager.latestFast {
-                    Text(currentFast.isFasting ? "Current Fast" : "Previous fast")
-                    EditableFastView(fast: Binding(
-                        get: { self.fastManager.latestFast ?? Fast() },
-                        set: { self.fastManager.updateLatestFast(with: $0) }
-                    )).padding(.horizontal, 80)
+                    Section(currentFast.isFasting ? "Current Fast" : "Previous fast"){
+                        EditableFastView(fast: Binding(
+                            get: { self.fastManager.latestFast ?? Fast() },
+                            set: { self.fastManager.updateLatestFast(with: $0) }
+                        ))
+                    }
                 }
                 
+                Section {
+                    StreakCounterView(fastManager: fastManager)
+                }
                 
-                Spacer()
-                Text("Last 4 weeks")
-            
-                FastingCalendarView(fastManager: fastManager)
-                    .padding(10)
-                
-                
-                
-                
+                Section("Last 4 weeks"){
+                    FastingCalendarView(fastManager: fastManager)
+                        .padding(10)
+                }
+
             }
         }
         .padding(10)
