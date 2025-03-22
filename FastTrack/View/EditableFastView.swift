@@ -21,28 +21,30 @@ struct EditableFastView: View {
     @State private var editingDate: EditingDate = .none
     
     var body: some View {
-
-            HStack {
-                Button {
-                    self.showingDatePicker = true
-                    editingDate = .startTime
-                } label: {
-                    VStack {
-                        Text("Started")
-                        Text(formatDateToString(date: fast.startTime))
-                    }
+        
+        HStack(spacing: 20) {
+            DateView(date: fast.startTime)
+            Button {
+                self.showingDatePicker = true
+                editingDate = .startTime
+            } label: {
+                VStack {
+                    Text("Started")
+                    Text(formatDateToString(date: fast.startTime))
                 }
-                Spacer()
-                Button {
-                    self.showingDatePicker = true
-                    editingDate = .endTime
-                } label: {
-                    VStack {
-                        Text(fast.isFasting ? "Goal" : "Ended")
-                        Text(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime))
-                    }
-                }.disabled(fast.endTime == nil)
-            }.padding(10)
+            }
+            Spacer()
+            Button {
+                self.showingDatePicker = true
+                editingDate = .endTime
+            } label: {
+                VStack {
+                    Text(fast.isFasting ? "Goal" : "Ended")
+                    Text(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime))
+                }
+            }.disabled(fast.endTime == nil)
+        }
+        .padding(10)
             .sheet(isPresented: $showingDatePicker) {
                 if editingDate == .startTime {
                     FastDatePickerView(dateTime: $fast.startTime, message: "Select Start Time")
@@ -59,14 +61,14 @@ struct EditableFastView: View {
                     }
                 }
             }
-                 
+        
     }
     
     func formatDateToString(date: Date?) -> String {
         guard let validDate = date else {
             return "—:—"
         }
-
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: validDate)

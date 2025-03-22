@@ -1,3 +1,11 @@
+//
+//  DateView.swift
+//  FastTrack
+//
+//  Created by Francesco Balestrieri on 21.3.2025.
+//
+
+
 import SwiftUI
 
 struct DateView: View {
@@ -6,7 +14,7 @@ struct DateView: View {
     var body: some View {
         VStack {
             Text(dayString)
-                .font(.system(size: 50, weight: .bold, design: .default))
+                .font(.system(size: 40, weight: .bold, design: .default))
             
             Text(monthString)
                 .font(.system(size: 20, weight: .medium, design: .default))
@@ -23,7 +31,7 @@ struct DateView: View {
     private var monthString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM"
-        return formatter.string(from: date)
+        return formatter.string(from: date).uppercased()
     }
 }
 
