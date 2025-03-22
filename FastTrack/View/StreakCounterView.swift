@@ -12,10 +12,6 @@ struct StreakCounterView: View {
     var body: some View {
         if fastManager.streak > 0 {
             Text("Streak: \(fastManager.streak) 🔥")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.indigo)
-                .clipShape(Capsule())
         }
     }
 }
