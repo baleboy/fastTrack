@@ -21,16 +21,21 @@ struct FastingView: View {
                     Text(elapsedText)
                         .font(.largeTitle.monospacedDigit())
                     
-                    ProgressView(value: elapsed, total: fastManager.currentDuration).padding(.horizontal, 30)
+                    ProgressView(value: elapsed, total: fastManager.currentDuration)
+                        .progressViewStyle(LinearProgressViewStyle(tint: fastManager.isFasting ? Color.red : Color.green)).padding()
+
                     
-                    Button(){
+                    Button {
                         toggleFasting()
                     } label: {
                         Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(fastManager.isFasting ? Color.red : Color.green) // Changes color dynamically
+                            .cornerRadius(10)
                     }
-                    .buttonStyle(.borderedProminent)
                     .padding()
-                    
                 }
                 if let currentFast = fastManager.latestFast {
                     Section(currentFast.isFasting ? "Current Fast" : "Previous fast"){
