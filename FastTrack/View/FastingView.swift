@@ -13,6 +13,7 @@ struct FastingView: View {
     @ObservedObject var timer: StopWatchTimer
     var toggleFasting: () -> Void
     
+
     var body: some View {
         VStack {
             Form {
@@ -22,7 +23,7 @@ struct FastingView: View {
                         .font(.largeTitle.monospacedDigit())
                     
                     ProgressView(value: elapsed, total: fastManager.currentDuration)
-                        .progressViewStyle(LinearProgressViewStyle(tint: fastManager.isFasting ? Color.red : Color.green)).padding()
+                        .progressViewStyle(LinearProgressViewStyle(tint: fastingColor)).padding()
 
                     
                     Button {
@@ -32,7 +33,7 @@ struct FastingView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(fastManager.isFasting ? Color.red : Color.green) // Changes color dynamically
+                            .background(fastingColor) // Changes color dynamically
                             .cornerRadius(10)
                     }
                     .padding()
@@ -62,6 +63,10 @@ struct FastingView: View {
     
     var fastingText: String {
         return fastManager.isFasting ? "Time fasting" : "Time since last fast"
+    }
+    
+    var fastingColor: Color {
+        fastManager.isFasting ? Color.purple : Color.blue
     }
     
     var elapsed: TimeInterval {
