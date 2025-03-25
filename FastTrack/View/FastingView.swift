@@ -17,14 +17,13 @@ struct FastingView: View {
     var body: some View {
         VStack {
             Form {
-                
                 Section(fastingText) {
                     Text(elapsedText)
                         .font(.largeTitle.monospacedDigit())
+                        .frame(maxWidth: .infinity, alignment: .center)
                     
                     ProgressView(value: elapsed, total: fastManager.currentDuration)
                         .progressViewStyle(LinearProgressViewStyle(tint: fastingColor)).padding()
-
                     
                     Button {
                         toggleFasting()
