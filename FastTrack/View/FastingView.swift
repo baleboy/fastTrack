@@ -17,11 +17,18 @@ struct FastingView: View {
     var body: some View {
         VStack {
             Form {
-                Section(fastingText) {
-                    Text(elapsedText)
-                        .font(.largeTitle.monospacedDigit())
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
+                Section {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(fastingText)
+                            Text(elapsedText)
+                                .font(.largeTitle.monospacedDigit())
+                        }
+                        Spacer()
+                        EditableFastView(fast: Binding(
+                            get: { self.fastManager.latestFast ?? Fast() },
+                            set: { self.fastManager.updateLatestFast(with: $0) }))
+                    }
                     ProgressView(value: elapsed, total: fastManager.currentDuration)
                         .progressViewStyle(LinearProgressViewStyle(tint: fastingColor)).padding()
                     
@@ -36,14 +43,6 @@ struct FastingView: View {
                             .cornerRadius(10)
                     }
                     .padding()
-                }
-                if let currentFast = fastManager.latestFast {
-                    Section(currentFast.isFasting ? "Current Fast" : "Previous fast"){
-                        EditableFastView(fast: Binding(
-                            get: { self.fastManager.latestFast ?? Fast() },
-                            set: { self.fastManager.updateLatestFast(with: $0) }
-                        ))
-                    }
                 }
                 
                 Section {
@@ -61,7 +60,7 @@ struct FastingView: View {
     }
     
     var fastingText: String {
-        return fastManager.isFasting ? "Time fasting" : "Time since last fast"
+        return fastManager.isFasting ? "Time fasting" : "Time since fast"
     }
     
     var fastingColor: Color {

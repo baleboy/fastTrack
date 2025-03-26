@@ -22,8 +22,7 @@ struct EditableFastView: View {
     
     var body: some View {
         
-        HStack(spacing: 20) {
-            DateView(date: fast.startTime)
+        VStack(spacing: 20) {
             Button {
                 self.showingDatePicker = true
                 editingDate = .startTime
@@ -33,7 +32,6 @@ struct EditableFastView: View {
                     Text(formatDateToString(date: fast.startTime))
                 }
             }
-            Spacer()
             Button {
                 self.showingDatePicker = true
                 editingDate = .endTime
