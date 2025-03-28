@@ -28,7 +28,7 @@ struct EditableFastView: View {
                 editingDate = .startTime
             } label: {
                 VStack {
-                    Text("Started")
+                    Text("Started").font(.caption)
                     Text(formatDateToString(date: fast.startTime))
                 }
             }
@@ -37,12 +37,11 @@ struct EditableFastView: View {
                 editingDate = .endTime
             } label: {
                 VStack {
-                    Text(fast.isFasting ? "Goal" : "Ended")
+                    Text(fast.isFasting ? "Goal" : "Ended").font(.caption)
                     Text(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime))
                 }
             }.disabled(fast.endTime == nil)
         }
-        .padding(10)
             .sheet(isPresented: $showingDatePicker) {
                 if editingDate == .startTime {
                     FastDatePickerView(dateTime: $fast.startTime, message: "Select Start Time")

@@ -15,12 +15,14 @@ struct FastingView: View {
     
 
     var body: some View {
-        VStack {
+        // VStack {
             Form {
                 Section {
-                    HStack {
+                    HStack(alignment: .top) {
                         VStack(alignment: .leading) {
                             Text(fastingText)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                             Text(elapsedText)
                                 .font(.largeTitle.monospacedDigit())
                         }
@@ -55,7 +57,7 @@ struct FastingView: View {
                 }
 
             }
-        }
+        //}
         .padding(10)
     }
     
