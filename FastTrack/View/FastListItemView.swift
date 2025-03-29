@@ -1,5 +1,5 @@
 //
-//  FastListItem.swift
+//  FastListItemView.swift
 //  FastTrack
 //
 //  Created by Francesco Balestrieri on 29.3.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FastListItem: View {
+struct FastListItemView: View {
     var fast: Fast
     var body: some View {
         HStack {
@@ -39,5 +39,5 @@ struct FastListItem: View {
 }
 
 #Preview {
-    FastListItem(fast: Fast(startTime: Date(), endTime: Date()))
+    FastListItemView(fast: Fast(startTime: Date(), endTime: Date()))
 }
