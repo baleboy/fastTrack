@@ -22,25 +22,27 @@ struct EditableFastView: View {
     
     var body: some View {
         
-        VStack(spacing: 20) {
-            Button {
-                self.showingDatePicker = true
-                editingDate = .startTime
-            } label: {
-                VStack {
-                    Text("Started").font(.caption)
-                    Text(formatDateToString(date: fast.startTime))
+        VStack(alignment: .trailing, spacing: 20) {
+            
+            HStack {
+                Text("Started")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Button(formatDateToString(date: fast.startTime)){
+                    self.showingDatePicker = true
+                    editingDate = .startTime
                 }
             }
-            Button {
-                self.showingDatePicker = true
-                editingDate = .endTime
-            } label: {
-                VStack {
-                    Text(fast.isFasting ? "Goal" : "Ended").font(.caption)
-                    Text(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime))
-                }
-            }.disabled(fast.endTime == nil)
+            
+            HStack {
+                Text(fast.isFasting ? "Goal" : "Ended")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Button(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime)) {
+                    self.showingDatePicker = true
+                    editingDate = .endTime
+                }.disabled(fast.endTime == nil)
+            }
         }
             .sheet(isPresented: $showingDatePicker) {
                 if editingDate == .startTime {

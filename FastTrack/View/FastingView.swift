@@ -1,97 +1,72 @@
-//
-//  FastingView.swift
-//  FastTrack
-//
-//  Created by Francesco Balestrieri on 14.3.2024.
-//
-
 import SwiftUI
 
 struct FastingView: View {
-    
     @ObservedObject var fastManager: FastManager
     @ObservedObject var timer: StopWatchTimer
     var toggleFasting: () -> Void
-    
 
     var body: some View {
-        // VStack {
-            Form {
-                Section {
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading) {
-                            Text(fastingText)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text(elapsedText)
-                                .font(.largeTitle.monospacedDigit())
-                        }
-                        Spacer()
-                        EditableFastView(fast: Binding(
-                            get: { self.fastManager.latestFast ?? Fast() },
-                            set: { self.fastManager.updateLatestFast(with: $0) }))
-                    }
-                    ProgressView(value: elapsed, total: fastManager.currentDuration)
-                        .progressViewStyle(LinearProgressViewStyle(tint: fastingColor)).padding()
-                    
-                    Button {
-                        toggleFasting()
-                    } label: {
-                        Text(fastManager.isFasting ? "Stop Fasting" : "Start Fasting")
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(fastingColor) // Changes color dynamically
-                            .cornerRadius(10)
-                    }
-                    .padding()
-                }
-                
-                Section {
+        ScrollView {
+            VStack(spacing: 20) {
+                // 🔥 Streak
+                if fastManager.streak > 0 {
                     StreakCounterView(fastManager: fastManager)
+                        .padding(.top)
                 }
                 
-                Section("Last 4 weeks"){
-                    FastingCalendarView(fastManager: fastManager)
-                        .padding(10)
+                // ⏱ Timer Card
+                Card {
+                FastingTimerCard(
+                    isFasting: fastManager.isFasting,
+                    elapsedText: elapsedText,
+                    duration: fastManager.currentDuration,
+                    elapsed: elapsed,
+                    onToggle: toggleFasting
+                )
+                }
+                // ✍️ Editable Fast Card
+                if let currentFast = fastManager.latestFast {
+                    Card(title: currentFast.isFasting ? "Current Fast" : "Previous Fast") {
+                        ModernEditableFastView(fast: Binding(
+                            get: { fastManager.latestFast ?? Fast() },
+                            set: { fastManager.updateLatestFast(with: $0) }
+                        ))
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
+                    }
                 }
 
+                // 📅 Calendar
+                Card(title: "Last 4 Weeks") {
+                    ModernFastingCalendarView(fastManager: fastManager)
+                        .padding(.top, 10)
+                }
             }
-        //}
-        .padding(10)
+            .padding()
+        }
+        .background(Color(.systemGroupedBackground)) // 👈 light gray
+        // .edgesIgnoringSafeArea(.all) // optional
     }
-    
-    var fastingText: String {
-        return fastManager.isFasting ? "Time fasting" : "Time since fast"
-    }
-    
-    var fastingColor: Color {
-        fastManager.isFasting ? Color.purple : Color.blue
-    }
-    
+
+    // MARK: - Helpers
+
     var elapsed: TimeInterval {
-        
-        let startTime = fastManager.latestEndTime ?? fastManager.latestStartTime ?? Date()
-    
-        return Date().timeIntervalSince(startTime)
+        let start = fastManager.latestEndTime ?? fastManager.latestStartTime ?? Date()
+        return Date().timeIntervalSince(start)
     }
-        
+
     var elapsedText: String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
-        
-        // Convert TimeInterval to String
-        let formattedString = formatter.string(from: elapsed) ?? "Invalid Interval"
-        
-        return formattedString
+        return formatter.string(from: elapsed) ?? "--:--"
     }
 }
 
 #Preview {
-    
     FastingView(fastManager: FastManager(), timer: StopWatchTimer()) {
-        print("button pressed")
+        print("Toggle fast")
     }
 }
+
