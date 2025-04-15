@@ -1,55 +1,70 @@
 //
-//  CalendarView.swift
+//  ModernFastingCalendarView.swift
 //  FastTrack
 //
-//  Created by Francesco Balestrieri on 18.4.2024.
+//  Created by Francesco Balestrieri on 13.4.2025.
 //
 
 import SwiftUI
 
 struct FastingCalendarView: View {
-    
     @ObservedObject var fastManager: FastManager
-    
-    var body: some View {
-        let dates = daysInLastFourWeeks()
-        let columns = Array(repeating: GridItem(.flexible()), count: 7)
 
-        return LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(dates, id: \.self) { date in
-                Text(date, formatter: itemFormatter)
-                    .frame(width: 40, height: 40)
-                    .background(getColorForDate(date).opacity(0.3))
-                    .cornerRadius(5)
+    private let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    private let daySymbols = Calendar.current.shortWeekdaySymbols
+
+    var body: some View {
+        VStack(spacing: 12) {
+            // Day headers
+            HStack {
+                ForEach(daySymbols, id: \.self) { day in
+                    Text(day.prefix(1)) // Just the first letter (e.g., "M")
+                        .font(.caption)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            LazyVGrid(columns: columns, spacing: 12) {
+                ForEach(daysInLastFourWeeks(), id: \.self) { date in
+                    ZStack {
+                        Circle()
+                            .fill(getColorForDate(date).opacity(0.3))
+                            .frame(width: 36, height: 36)
+
+                        Text("\(Calendar.current.component(.day, from: date))")
+                            .font(.footnote)
+                            .foregroundColor(.primary)
+
+                        if isToday(date: date) {
+                            Circle()
+                                .stroke(Color.accentColor, lineWidth: 2)
+                                .frame(width: 40, height: 40)
+                        }
+                    }
+                }
             }
         }
+        .padding()
     }
-    
+
+    // Utilities
     private func isToday(date: Date) -> Bool {
-        Calendar.current.isDate(date, inSameDayAs: today)
-    }
-    private var today: Date {
-        Date()
+        Calendar.current.isDate(date, inSameDayAs: Date())
     }
 
     private func daysInLastFourWeeks() -> [Date] {
-        let dates = (0..<28).map { day -> Date in
-            Calendar.current.date(byAdding: .day, value: -day, to: today )!
-        }
-        return dates.reversed()
+        let today = Date()
+        return (0..<28).compactMap { day in
+            Calendar.current.date(byAdding: .day, value: -day, to: today)
+        }.reversed()
     }
-    
-    private var itemFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter
-    }
-    
+
     private func getColorForDate(_ date: Date) -> Color {
         if let fast = fastManager.fastForDate(date) {
-            return fast.isSuccessful ? Color.green : Color.yellow
+            return fast.isSuccessful ? .green : .yellow
         }
-        return Color.gray
+        return .gray
     }
 }
 

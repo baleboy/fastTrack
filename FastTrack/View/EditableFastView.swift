@@ -1,8 +1,8 @@
 //
-//  FastView.swift
+//  ModernEditableFastView.swift
 //  FastTrack
 //
-//  Created by Francesco Balestrieri on 9.3.2024.
+//  Created by Francesco Balestrieri on 13.4.2025.
 //
 
 import SwiftUI
@@ -14,60 +14,72 @@ enum EditingDate {
 }
 
 struct EditableFastView: View {
-    
     @Binding var fast: Fast
-    
+
     @State private var showingDatePicker = false
     @State private var editingDate: EditingDate = .none
-    
+
     var body: some View {
-        
-        VStack(alignment: .trailing, spacing: 20) {
-            
-            HStack {
-                Text("Started")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Button(formatDateToString(date: fast.startTime)){
-                    self.showingDatePicker = true
-                    editingDate = .startTime
-                }
+        HStack(spacing: 16) {
+            timeTile(title: "Started", date: fast.startTime) {
+                editingDate = .startTime
+                showingDatePicker = true
             }
-            
-            HStack {
-                Text(fast.isFasting ? "Goal" : "Ended")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Button(formatDateToString(date: fast.isFasting ? fast.goalTime : fast.endTime)) {
-                    self.showingDatePicker = true
-                    editingDate = .endTime
-                }.disabled(fast.endTime == nil)
+
+            timeTile(
+                title: fast.isFasting ? "Goal" : "Ended",
+                date: fast.isFasting ? fast.goalTime : fast.endTime,
+                disabled: fast.endTime == nil
+            ) {
+                editingDate = .endTime
+                showingDatePicker = true
             }
         }
-            .sheet(isPresented: $showingDatePicker) {
-                if editingDate == .startTime {
-                    FastDatePickerView(dateTime: $fast.startTime, message: "Select Start Time")
-                }
-                else {
-                    // Bindings and optionals don't go well together
-                    if let date = fast.endTime {
-                        FastDatePickerView(dateTime: Binding(
-                            get: { date },
-                            set: { fast.endTime = $0 }
-                        ), message: "Select End Time")
-                    } else {
-                        Text("Error - endDate is nil")
-                    }
-                }
+        .sheet(isPresented: $showingDatePicker) {
+            if editingDate == .startTime {
+                FastDatePickerView(dateTime: $fast.startTime, message: "Edit Start Time")
+            } else if editingDate == .endTime, let date = fast.endTime {
+                FastDatePickerView(dateTime: Binding(
+                    get: { date },
+                    set: { fast.endTime = $0 }
+                ), message: "Edit End Time")
+            } else {
+                Text("End time is not available")
+                    .font(.headline)
+                    .padding()
             }
-        
+        }
     }
-    
-    func formatDateToString(date: Date?) -> String {
-        guard let validDate = date else {
-            return "—:—"
+
+    // MARK: - Time Tile
+
+    func timeTile(title: String, date: Date?, disabled: Bool = false, action: @escaping () -> Void) -> some View {
+        Button(action: {
+            if !disabled { action() }
+        }) {
+            VStack(spacing: 4) {
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                Text(formatDateToString(date: date))
+                    .font(.body)
+                    .fontWeight(.medium)
+                    .foregroundColor(disabled ? .gray : .primary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color(.secondarySystemBackground))
+            )
         }
-        
+        .disabled(disabled)
+    }
+
+    func formatDateToString(date: Date?) -> String {
+        guard let validDate = date else { return "--:--" }
+
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: validDate)
@@ -76,5 +88,5 @@ struct EditableFastView: View {
 
 #Preview {
     EditableFastView(fast: .constant(Fast()))
-    // Date().addingTimeInterval(3600))))
+        .padding()
 }

@@ -16,7 +16,7 @@ struct FastingView: View {
                 
                 // ⏱ Timer Card
                 Card {
-                FastingTimerCard(
+                FastingTimerView(
                     isFasting: fastManager.isFasting,
                     elapsedText: elapsedText,
                     duration: fastManager.currentDuration,
@@ -27,7 +27,7 @@ struct FastingView: View {
                 // ✍️ Editable Fast Card
                 if let currentFast = fastManager.latestFast {
                     Card(title: currentFast.isFasting ? "Current Fast" : "Previous Fast") {
-                        ModernEditableFastView(fast: Binding(
+                        EditableFastView(fast: Binding(
                             get: { fastManager.latestFast ?? Fast() },
                             set: { fastManager.updateLatestFast(with: $0) }
                         ))
@@ -38,7 +38,7 @@ struct FastingView: View {
 
                 // 📅 Calendar
                 Card(title: "Last 4 Weeks") {
-                    ModernFastingCalendarView(fastManager: fastManager)
+                    FastingCalendarView(fastManager: fastManager)
                         .padding(.top, 10)
                 }
             }

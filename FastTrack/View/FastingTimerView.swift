@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FastingTimerCard: View {
+struct FastingTimerView: View {
     let isFasting: Bool
     let elapsedText: String
     let duration: TimeInterval
@@ -53,7 +53,7 @@ struct FastingTimerCard: View {
 }
 
 #Preview {
-    FastingTimerCard(
+    FastingTimerView(
         isFasting: true,
         elapsedText: "03:42:10",
         duration: 16 * 3600,

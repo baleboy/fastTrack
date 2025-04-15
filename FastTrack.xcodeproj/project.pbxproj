@@ -9,25 +9,22 @@
 /* Begin PBXBuildFile section */
 		2500BB292B5D028400F92577 /* StopWatchTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2500BB282B5D028400F92577 /* StopWatchTimer.swift */; };
 		250858A82B95B2820092DBA2 /* FastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858A72B95B2820092DBA2 /* FastTests.swift */; };
-		250858AA2B9C5B5F0092DBA2 /* EditableFastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858A92B9C5B5F0092DBA2 /* EditableFastView.swift */; };
 		250858AE2B9DD17B0092DBA2 /* FastDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858AD2B9DD17B0092DBA2 /* FastDatePickerView.swift */; };
 		250858B22BA2D7940092DBA2 /* FastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858B12BA2D7940092DBA2 /* FastingView.swift */; };
-		250858BA2BB69C150092DBA2 /* FastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858B92BB69C150092DBA2 /* FastListItemView.swift */; };
 		250858BC2BB7F6500092DBA2 /* StreakCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858BB2BB7F6500092DBA2 /* StreakCounterView.swift */; };
 		2515D2302B737AA600992B09 /* FastingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515D22F2B737AA600992B09 /* FastingNotification.swift */; };
 		2515D2572B90508800992B09 /* FastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515D2562B90508800992B09 /* FastManager.swift */; };
 		2515D25F2B91B91900992B09 /* FastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515D25E2B91B91900992B09 /* FastManagerTests.swift */; };
-		257B509F2D893BA700E7B641 /* FastingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B509E2D893BA700E7B641 /* FastingCalendarView.swift */; };
 		257B50A12D8DCA4100E7B641 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B50A02D8DCA4100E7B641 /* DateView.swift */; };
 		259A00212B6E58E9007C9E07 /* Fast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259A00202B6E58E9007C9E07 /* Fast.swift */; };
 		25BD0D0F2B57B457007D8F99 /* FastTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD0D0E2B57B457007D8F99 /* FastTrack.swift */; };
 		25BD0D112B57B457007D8F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD0D102B57B457007D8F99 /* ContentView.swift */; };
 		25BD0D132B57B45B007D8F99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BD0D122B57B45B007D8F99 /* Assets.xcassets */; };
 		25BD0D162B57B45B007D8F99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25BD0D152B57B45B007D8F99 /* Preview Assets.xcassets */; };
-		25F2A87F2DAB8B59002AC798 /* FastingTimerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A87E2DAB8B50002AC798 /* FastingTimerCard.swift */; };
-		25F2A8812DAB8BC8002AC798 /* ModernFastingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A8802DAB8BC2002AC798 /* ModernFastingCalendarView.swift */; };
+		25F2A87F2DAB8B59002AC798 /* FastingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A87E2DAB8B50002AC798 /* FastingTimerView.swift */; };
+		25F2A8812DAB8BC8002AC798 /* FastingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A8802DAB8BC2002AC798 /* FastingCalendarView.swift */; };
 		25F2A8832DAB8CFB002AC798 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A8822DAB8CF2002AC798 /* Card.swift */; };
-		25F2A8852DAB8DA2002AC798 /* ModernEditableFastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A8842DAB8D96002AC798 /* ModernEditableFastView.swift */; };
+		25F2A8852DAB8DA2002AC798 /* EditableFastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2A8842DAB8D96002AC798 /* EditableFastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,16 +40,13 @@
 /* Begin PBXFileReference section */
 		2500BB282B5D028400F92577 /* StopWatchTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchTimer.swift; sourceTree = "<group>"; };
 		250858A72B95B2820092DBA2 /* FastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTests.swift; sourceTree = "<group>"; };
-		250858A92B9C5B5F0092DBA2 /* EditableFastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableFastView.swift; sourceTree = "<group>"; };
 		250858AD2B9DD17B0092DBA2 /* FastDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastDatePickerView.swift; sourceTree = "<group>"; };
 		250858B12BA2D7940092DBA2 /* FastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingView.swift; sourceTree = "<group>"; };
-		250858B92BB69C150092DBA2 /* FastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastListItemView.swift; sourceTree = "<group>"; };
 		250858BB2BB7F6500092DBA2 /* StreakCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCounterView.swift; sourceTree = "<group>"; };
 		2515D22F2B737AA600992B09 /* FastingNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingNotification.swift; sourceTree = "<group>"; };
 		2515D2562B90508800992B09 /* FastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastManager.swift; sourceTree = "<group>"; };
 		2515D25C2B91B91900992B09 /* FastTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FastTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2515D25E2B91B91900992B09 /* FastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastManagerTests.swift; sourceTree = "<group>"; };
-		257B509E2D893BA700E7B641 /* FastingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingCalendarView.swift; sourceTree = "<group>"; };
 		257B50A02D8DCA4100E7B641 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		259A00202B6E58E9007C9E07 /* Fast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fast.swift; sourceTree = "<group>"; };
 		25BD0D0B2B57B457007D8F99 /* FastTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,10 +54,10 @@
 		25BD0D102B57B457007D8F99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25BD0D122B57B45B007D8F99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25BD0D152B57B45B007D8F99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		25F2A87E2DAB8B50002AC798 /* FastingTimerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingTimerCard.swift; sourceTree = "<group>"; };
-		25F2A8802DAB8BC2002AC798 /* ModernFastingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernFastingCalendarView.swift; sourceTree = "<group>"; };
+		25F2A87E2DAB8B50002AC798 /* FastingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingTimerView.swift; sourceTree = "<group>"; };
+		25F2A8802DAB8BC2002AC798 /* FastingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingCalendarView.swift; sourceTree = "<group>"; };
 		25F2A8822DAB8CF2002AC798 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		25F2A8842DAB8D96002AC798 /* ModernEditableFastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernEditableFastView.swift; sourceTree = "<group>"; };
+		25F2A8842DAB8D96002AC798 /* EditableFastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableFastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,17 +90,14 @@
 		250858AC2B9DBAD90092DBA2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				25F2A8842DAB8D96002AC798 /* ModernEditableFastView.swift */,
+				25F2A8842DAB8D96002AC798 /* EditableFastView.swift */,
 				25F2A8822DAB8CF2002AC798 /* Card.swift */,
-				25F2A8802DAB8BC2002AC798 /* ModernFastingCalendarView.swift */,
-				25F2A87E2DAB8B50002AC798 /* FastingTimerCard.swift */,
-				257B509E2D893BA700E7B641 /* FastingCalendarView.swift */,
+				25F2A8802DAB8BC2002AC798 /* FastingCalendarView.swift */,
+				25F2A87E2DAB8B50002AC798 /* FastingTimerView.swift */,
 				25BD0D102B57B457007D8F99 /* ContentView.swift */,
-				250858A92B9C5B5F0092DBA2 /* EditableFastView.swift */,
 				257B50A02D8DCA4100E7B641 /* DateView.swift */,
 				250858AD2B9DD17B0092DBA2 /* FastDatePickerView.swift */,
 				250858B12BA2D7940092DBA2 /* FastingView.swift */,
-				250858B92BB69C150092DBA2 /* FastListItemView.swift */,
 				250858BB2BB7F6500092DBA2 /* StreakCounterView.swift */,
 			);
 			path = View;
@@ -274,17 +265,14 @@
 				257B50A12D8DCA4100E7B641 /* DateView.swift in Sources */,
 				25BD0D112B57B457007D8F99 /* ContentView.swift in Sources */,
 				25BD0D0F2B57B457007D8F99 /* FastTrack.swift in Sources */,
-				257B509F2D893BA700E7B641 /* FastingCalendarView.swift in Sources */,
-				250858AA2B9C5B5F0092DBA2 /* EditableFastView.swift in Sources */,
 				2515D2572B90508800992B09 /* FastManager.swift in Sources */,
 				250858B22BA2D7940092DBA2 /* FastingView.swift in Sources */,
-				250858BA2BB69C150092DBA2 /* FastListItemView.swift in Sources */,
 				2500BB292B5D028400F92577 /* StopWatchTimer.swift in Sources */,
-				25F2A87F2DAB8B59002AC798 /* FastingTimerCard.swift in Sources */,
-				25F2A8852DAB8DA2002AC798 /* ModernEditableFastView.swift in Sources */,
+				25F2A87F2DAB8B59002AC798 /* FastingTimerView.swift in Sources */,
+				25F2A8852DAB8DA2002AC798 /* EditableFastView.swift in Sources */,
 				2515D2302B737AA600992B09 /* FastingNotification.swift in Sources */,
 				259A00212B6E58E9007C9E07 /* Fast.swift in Sources */,
-				25F2A8812DAB8BC8002AC798 /* ModernFastingCalendarView.swift in Sources */,
+				25F2A8812DAB8BC8002AC798 /* FastingCalendarView.swift in Sources */,
 				250858BC2BB7F6500092DBA2 /* StreakCounterView.swift in Sources */,
 				25F2A8832DAB8CFB002AC798 /* Card.swift in Sources */,
 			);
