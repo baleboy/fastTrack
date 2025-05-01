@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FastingCalendarView: View {
-    @ObservedObject var fastManager: FastManager
+    @ObservedObject var historyManager: FastHistoryManager
 
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
     private let daySymbols = Calendar.current.shortWeekdaySymbols
@@ -61,7 +61,7 @@ struct FastingCalendarView: View {
     }
 
     private func getColorForDate(_ date: Date) -> Color {
-        if let fast = fastManager.fastForDate(date) {
+        if let fast = historyManager.fastForDate(date) {
             return fast.isSuccessful ? .green : .yellow
         }
         return .gray
@@ -69,5 +69,5 @@ struct FastingCalendarView: View {
 }
 
 #Preview {
-    FastingCalendarView(fastManager: FastManager())
+    FastingCalendarView(historyManager: FastHistoryManager())
 }
