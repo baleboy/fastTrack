@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		250858A82B95B2820092DBA2 /* FastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250858A72B95B2820092DBA2 /* FastTests.swift */; };
 		2515D25F2B91B91900992B09 /* FastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515D25E2B91B91900992B09 /* FastManagerTests.swift */; };
-		2521F7282DBAAD580089A8BA /* Fast2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2521F7272DBAAD580089A8BA /* Fast2.swift */; };
+		2521F7282DBAAD580089A8BA /* Fast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2521F7272DBAAD580089A8BA /* Fast.swift */; };
 		2521F7392DBAC8CA0089A8BA /* FastingProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2521F7382DBAC8B90089A8BA /* FastingProgressTracker.swift */; };
 		2521F73B2DBACB910089A8BA /* FastingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2521F73A2DBACB910089A8BA /* FastingTimerView.swift */; };
 		2521F73D2DBACF050089A8BA /* FastTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2521F73C2DBACF050089A8BA /* FastTrackView.swift */; };
@@ -40,7 +40,7 @@
 		250858A72B95B2820092DBA2 /* FastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTests.swift; sourceTree = "<group>"; };
 		2515D25C2B91B91900992B09 /* FastTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FastTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2515D25E2B91B91900992B09 /* FastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastManagerTests.swift; sourceTree = "<group>"; };
-		2521F7272DBAAD580089A8BA /* Fast2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fast2.swift; sourceTree = "<group>"; };
+		2521F7272DBAAD580089A8BA /* Fast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fast.swift; sourceTree = "<group>"; };
 		2521F7382DBAC8B90089A8BA /* FastingProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingProgressTracker.swift; sourceTree = "<group>"; };
 		2521F73A2DBACB910089A8BA /* FastingTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastingTimerView.swift; sourceTree = "<group>"; };
 		2521F73C2DBACF050089A8BA /* FastTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastTrackView.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		250858AB2B9DBAC80092DBA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2521F7272DBAAD580089A8BA /* Fast2.swift */,
+				2521F7272DBAAD580089A8BA /* Fast.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				25EA2B8B2DBD0A4500BB43D3 /* FastingCalendarView.swift in Sources */,
 				2521F7392DBAC8CA0089A8BA /* FastingProgressTracker.swift in Sources */,
 				253277C32DC3677C007BA1F6 /* FastingNotification.swift in Sources */,
-				2521F7282DBAAD580089A8BA /* Fast2.swift in Sources */,
+				2521F7282DBAAD580089A8BA /* Fast.swift in Sources */,
 				2521F7412DBCC7090089A8BA /* CurrentFastView.swift in Sources */,
 				253277C12DBF9C6C007BA1F6 /* FastingNotificationManager.swift in Sources */,
 				25EA2B892DBD08E300BB43D3 /* FastHistoryManager.swift in Sources */,

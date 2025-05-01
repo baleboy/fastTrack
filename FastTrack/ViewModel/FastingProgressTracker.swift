@@ -69,7 +69,7 @@ class FastingProgressTracker: ObservableObject {
         stopTimerPublisher()
         
         if let startTime = fastingStartTime {
-            historyManager.append(Fast2(startTime: startTime, endTime: dateTime))
+            historyManager.append(Fast(startTime: startTime, endTime: dateTime))
         }
         
         fastingEndTime = dateTime

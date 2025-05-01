@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Fast2: Codable, Identifiable {
+struct Fast: Codable, Identifiable {
 
     static let defaultFastingHours = 16
 

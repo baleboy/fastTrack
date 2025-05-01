@@ -8,7 +8,7 @@
 import SwiftUI
 
 class FastHistoryManager: ObservableObject {
-    @Published var history: [Fast2] = []{
+    @Published var history: [Fast] = []{
         didSet {
             saveHistory()
         }
@@ -19,12 +19,12 @@ class FastHistoryManager: ObservableObject {
         loadHistory()
     }
     
-    func append(_ item: Fast2) {
+    func append(_ item: Fast) {
         objectWillChange.send()
         history.append(item)
     }
     
-    func fastForDate(_ date: Date) -> Fast2? {
+    func fastForDate(_ date: Date) -> Fast? {
         for fast in history {
             if Calendar.current.isDate(fast.endTime ?? Date(), inSameDayAs: date) {
                 return fast
@@ -33,7 +33,7 @@ class FastHistoryManager: ObservableObject {
         return nil
     }
     
-    func fastsForDate(_ date: Date) -> [Fast2] {
+    func fastsForDate(_ date: Date) -> [Fast] {
         return history.filter { fast in
             if let endTime = fast.endTime {
                 return Calendar.current.isDate(endTime, inSameDayAs: date)
@@ -80,7 +80,7 @@ class FastHistoryManager: ObservableObject {
     
     private func loadHistory() {
         if let savedData = UserDefaults.standard.data(forKey: historyKey) {
-            if let loadedHistory = try? JSONDecoder().decode([Fast2].self, from: savedData) {
+            if let loadedHistory = try? JSONDecoder().decode([Fast].self, from: savedData) {
                 history = loadedHistory
             }
         }
