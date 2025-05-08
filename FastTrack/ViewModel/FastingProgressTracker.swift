@@ -182,6 +182,7 @@ class FastingProgressTracker: ObservableObject {
     func timerIsVisible() {
         print("Timer is visible - starting timer if needed")
         if isFasting || fastingEndTime != nil {
+            updateElapsedTime(until: Date.now)
             startTimerPublisher()
         }
     }
