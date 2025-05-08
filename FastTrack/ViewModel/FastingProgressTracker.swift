@@ -159,6 +159,7 @@ class FastingProgressTracker: ObservableObject {
                 isFasting = loadedState.isFasting
                 fastingStartTime = loadedState.fastingStartTime
                 fastingEndTime = loadedState.fastingEndTime
+                updateElapsedTime(until: Date.now)
             }
         }
     }
